@@ -1,0 +1,129 @@
+/* Custom animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+/* Animation delay utilities */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+/* Ensure elements with animation delay start invisible */
+[style*="animation-delay"] {
+    opacity: 0;
+}
+
+/* Custom button styles */
+.btn-primary-outline {
+    color: #f43f5e;
+    border: 2px solid #f43f5e;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-outline:hover {
+    background-color: #f43f5e;
+    color: white;
+}
+
+/* Pet card hover effects */
+.pet-card {
+    transition: all 0.3s ease;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.pet-card img {
+    transition: transform 0.5s ease;
+}
+
+.pet-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Custom form styles */
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #f43f5e;
+    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.1);
+}
+
+/* Hero section styles */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg-circle {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background-color: #fff1f2;
+    top: -250px;
+    right: -250px;
+    z-index: -1;
+}
+
+/* Section title underline */
+.section-title-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.section-title-underline:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #f43f5e;
+}
+
+/* Stats counter animation */
+.stat-counter {
+    display: inline-block;
+    font-weight: bold;
+}
+
+/* Process steps */
+.process-step {
+    position: relative;
+}
+
+.process-step:not(:last-child):after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -50%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #f43f5e, #fbbf24);
+    z-index: -1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .process-step:not(:last-child):after {
+        display: none;
+    }
+    
+    .hero-bg-circle {
+        width: 300px;
+        height: 300px;
+        top: -150px;
+        right: -150px;
+    }
+}

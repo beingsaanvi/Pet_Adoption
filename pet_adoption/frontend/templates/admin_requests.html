@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block content %}
+<div class="flex items-center gap-3 mb-8 animate-fade-in">
+    <a href="{% url 'admin_dashboard' %}" class="text-rose-500 hover:text-rose-600 transition-all duration-300 flex items-center gap-2 group">
+        <div class="w-8 h-8 bg-rose-100 rounded-xl flex items-center justify-center group-hover:bg-rose-200 transition-all duration-300">
+            <i class="fas fa-arrow-left text-rose-500"></i>
+        </div>
+        <span>Back to Dashboard</span>
+    </a>
+</div>
+
+<h1 class="text-3xl md:text-4xl font-bold mb-8 text-gray-800 animate-fade-in bg-gradient-to-r from-rose-500 to-amber-500 bg-clip-text text-transparent">Adoption Requests</h1>
+
+<div class="bg-white rounded-2xl shadow-xl overflow-hidden animate-fade-in" style="animation-delay: 0.1s;">
+    <div class="bg-gradient-to-r from-rose-500 to-amber-500 p-8 text-white relative overflow-hidden">
+        <div class="absolute -right-10 -top-10 w-40 h-40 bg-white bg-opacity-10 rounded-full"></div>
+        <div class="absolute -right-5 -bottom-10 w-20 h-20 bg-white bg-opacity-10 rounded-full"></div>
+        <div class="flex justify-between items-center relative z-10">
+            <div>
+                <h2 class="text-2xl font-bold">Manage Adoption Requests</h2>
+                <p class="mt-2 text-white/90">Review and process adoption requests from users</p>
+            </div>
+            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center text-3xl shadow-lg">📋</div>
+        </div>
+    </div>
+    
+    <div class="p-8">
+        {% if requests %}
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="bg-gray-50 text-left p-4 border-b-2 border-gray-200 font-semibold text-gray-700 rounded-tl-xl">User Name</th>
+                            <th class="bg-gray-50 text-left p-4 border-b-2 border-gray-200 font-semibold text-gray-700">Email</th>
+                            <th class="bg-gray-50 text-left p-4 border-b-2 border-gray-200 font-semibold text-gray-700">Phone</th>
+                            <th class="bg-gray-50 text-left p-4 border-b-2 border-gray-200 font-semibold text-gray-700">Pet</th>
+                            <th class="bg-gray-50 text-left p-4 border-b-2 border-gray-200 font-semibold text-gray-700">Message</th>
+                            <th class="bg-gray-50 text-left p-4 border-b-2 border-gray-200 font-semibold text-gray-700">Status</th>
+                            <th class="bg-gray-50 text-left p-4 border-b-2 border-gray-200 font-semibold text-gray-700 rounded-tr-xl">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for req in requests %}
+                            <tr class="hover:bg-gray-50 transition-colors duration-200 animate-fade-in delay-{% with delay=forloop.counter0|multiply:1|add:1 %}{% if delay <= 5 %}{{ delay }}{% else %}5{% endif %}{% endwith %}">
+                                <td class="p-4 border-b border-gray-200">
+                                    <div class="font-medium text-gray-800">{{ req.user_name }}</div>
+                                </td>
+                                <td class="p-4 border-b border-gray-200">
+                                    <div class="text-gray-600">{{ req.email }}</div>
+                                </td>
+                                <td class="p-4 border-b border-gray-200">
+                                    <div class="text-gray-600">{{ req.phone|default:"N/A" }}</div>
+                                </td>
+                                <td class="p-4 border-b border-gray-200">
+                                    <div class="font-medium text-gray-800">{{ req.pet_name }}</div>
+                                </td>
+                                <td class="p-4 border-b border-gray-200">
+                                    {% if req.message %}
+                                        <button type="button" class="text-rose-500 hover:text-rose-600 text-sm flex items-center gap-1 hover:gap-2 transition-all duration-300" onclick="alert('{{ req.message }}')">
+                                            <i class="fas fa-comment-alt"></i>
+                                            <span>View Message</span>
+                                        </button>
+                                    {% else %}
+                                        <span class="text-gray-500">N/A</span>
+                                    {% endif %}
+                                </td>
+                                <td class="p-4 border-b border-gray-200">
+                                    <span class="{% if req.approved %}bg-green-100 text-green-800{% elif req.rejected %}bg-red-100 text-red-800{% else %}bg-amber-100 text-amber-800{% endif %} text-xs px-3 py-1.5 rounded-xl font-medium inline-flex items-center gap-1">
+                                        {% if req.approved %}
+                                            <i class="fas fa-check-circle"></i> Approved
+                                        {% elif req.rejected %}
+                                            <i class="fas fa-times-circle"></i> Rejected
+                                        {% else %}
+                                            <i class="fas fa-clock"></i> Pending
+                                        {% endif %}
+                                    </span>
+                                </td>
+                                <td class="p-4 border-b border-gray-200">
+                                    <div class="flex gap-2">
+                                        {% if not req.approved and not req.rejected %}
+                                            <form action="{% url 'approve_request' req.id %}" method="POST" class="inline">
+                                                {% csrf_token %}
+                                                <button type="submit" class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-sm px-3 py-1.5 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex items-center gap-1">
+                                                    <i class="fas fa-check"></i>
+                                                    <span>Approve</span>
+                                                </button>
+                                            </form>
+                                            <form action="{% url 'reject_request' req.id %}" method="POST" class="inline">
+                                                {% csrf_token %}
+                                                <button type="submit" class="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-sm px-3 py-1.5 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex items-center gap-1">
+                                                    <i class="fas fa-times"></i>
+                                                    <span>Reject</span>
+                                                </button>
+                                            </form>
+                                        {% endif %}
+                                        <form action="{% url 'delete_request' req.id %}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this adoption request?');">
+                                            {% csrf_token %}
+                                            <button type="submit" class="bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white text-sm px-3 py-1.5 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex items-center gap-1">
+                                                <i class="fas fa-trash-alt"></i>
+                                                <span>Delete</span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-16 animate-fade-in">
+                <div class="w-24 h-24 bg-amber-100 rounded-2xl flex items-center justify-center text-5xl mx-auto mb-6 animate-bounce-in">📭</div>
+                <p class="text-gray-600 text-xl font-medium mb-2">No adoption requests found.</p>
+                <p class="text-gray-500">Requests will appear here when users submit them.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

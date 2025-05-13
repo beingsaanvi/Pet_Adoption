@@ -1,0 +1,636 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paws & Hearts - Pet Adoption</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rose: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#881337',
+                            950: '#4c0519',
+                        },
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                            950: '#451a03',
+                        },
+                        primary: '#f43f5e', // Rose-500
+                        secondary: '#fbbf24', // Amber-400
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out forwards',
+                        'slide-up': 'slideUp 0.6s ease-in-out forwards',
+                        'slide-right': 'slideRight 0.6s ease-in-out forwards',
+                        'scale-in': 'scaleIn 0.5s ease-in-out forwards',
+                        'bounce-in': 'bounceIn 0.8s ease-in-out forwards',
+                        'pulse': 'pulse 2s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: 0, transform: 'translateY(10px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: 0, transform: 'translateY(30px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        slideRight: {
+                            '0%': { opacity: 0, transform: 'translateX(-30px)' },
+                            '100%': { opacity: 1, transform: 'translateX(0)' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: 0, transform: 'scale(0.9)' },
+                            '100%': { opacity: 1, transform: 'scale(1)' },
+                        },
+                        bounceIn: {
+                            '0%': { opacity: 0, transform: 'scale(0.3)' },
+                            '50%': { opacity: 1, transform: 'scale(1.05)' },
+                            '70%': { transform: 'scale(0.9)' },
+                            '100%': { transform: 'scale(1)' },
+                        },
+                        pulse: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.05)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom CSS */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .btn-primary {
+            background-color: #f43f5e;
+            border-color: #f43f5e;
+            box-shadow: 0 4px 6px rgba(244, 63, 94, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #e11d48;
+            border-color: #e11d48;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(244, 63, 94, 0.3);
+        }
+        .btn-secondary {
+            background-color: #fbbf24;
+            border-color: #fbbf24;
+            box-shadow: 0 4px 6px rgba(251, 191, 36, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #f59e0b;
+            border-color: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(251, 191, 36, 0.3);
+        }
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .feature-icon:hover {
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 15px 20px rgba(0,0,0,0.15);
+        }
+        .process-step {
+            width: 140px;
+            height: 140px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .process-step:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, rgba(244, 63, 94, 0.3), rgba(251, 191, 36, 0.3));
+            z-index: -1;
+            border-radius: 40px;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        .process-step:hover:before {
+            transform: scale(1);
+            opacity: 1;
+        }
+        .process-step:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        .stat-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .stat-circle:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        .pet-card {
+            transition: all 0.4s ease;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background: #fff;
+            position: relative;
+        }
+        .pet-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+        }
+        .pet-card img {
+            height: 240px;
+            object-fit: cover;
+            width: 100%;
+            transition: all 0.5s ease;
+        }
+        .pet-card:hover img {
+            transform: scale(1.05);
+        }
+        .pet-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #f43f5e, #fbbf24);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .pet-card:hover::after {
+            transform: scaleX(1);
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #f9fafb 0%, #fff1f2 100%);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .hero-image {
+            position: relative;
+            z-index: 1;
+            transition: all 0.5s ease;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        .hero-image img {
+            transition: all 0.5s ease;
+        }
+        .hero-image:hover img {
+            transform: scale(1.05);
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.1), rgba(251, 191, 36, 0.1));
+            border-radius: 0 0 0 100px;
+            z-index: 0;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #f43f5e, #fbbf24);
+            border-radius: 2px;
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #f43f5e, #fbbf24);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        .card-hover-effect {
+            transition: all 0.3s ease;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .footer-icon {
+            transition: all 0.3s ease;
+        }
+        .footer-icon:hover {
+            transform: translateY(-5px) rotate(10deg);
+        }
+        .custom-shape-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        .custom-shape-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 70px;
+        }
+        .custom-shape-divider .shape-fill {
+            fill: #FFFFFF;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .navbar {
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideRight {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+        .animate-fade-in {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+        .animate-slide-up {
+            opacity: 0;
+            animation: slideUp 0.6s ease-in-out forwards;
+        }
+        .animate-slide-right {
+            opacity: 0;
+            animation: slideRight 0.6s ease-in-out forwards;
+        }
+        .animate-scale-in {
+            opacity: 0;
+            animation: scaleIn 0.5s ease-in-out forwards;
+        }
+        .animate-bounce-in {
+            opacity: 0;
+            animation: bounceIn 0.8s ease-in-out forwards;
+        }
+        [style*="animation-delay"] {
+            opacity: 0;
+        }
+        .paw-print-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M29.5 10c-2.5 0-4.5 2-4.5 4.5s2 4.5 4.5 4.5 4.5-2 4.5-4.5-2-4.5-4.5-4.5zm0 18c-2.5 0-4.5 2-4.5 4.5s2 4.5 4.5 4.5 4.5-2 4.5-4.5-2-4.5-4.5-4.5zm-9-9c-2.5 0-4.5 2-4.5 4.5s2 4.5 4.5 4.5 4.5-2 4.5-4.5-2-4.5-4.5-4.5zm18 0c-2.5 0-4.5 2-4.5 4.5s2 4.5 4.5 4.5 4.5-2 4.5-4.5-2-4.5-4.5-4.5zm-9 18c-2.5 0-4.5 2-4.5 4.5s2 4.5 4.5 4.5 4.5-2 4.5-4.5-2-4.5-4.5-4.5z' fill='%23f43f5e' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="bg-gray-50 font-sans paw-print-bg">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm py-4 sticky top-0 z-50 navbar">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">                <a href="{% url 'index' %}" class="text-primary text-2xl font-bold flex items-center gap-4 group">
+                    <div class="w-12 h-12 bg-rose-100 rounded-2xl flex items-center justify-center shadow-md transition-all duration-300 group-hover:bg-rose-200 group-hover:rotate-6">
+                        <span class="text-2xl">🐾</span>
+                    </div>
+                    <span class="bg-gradient-to-r from-rose-500 to-amber-500 bg-clip-text text-transparent whitespace-nowrap">Paws & Hearts</span>
+                </a><div class="hidden md:flex items-center gap-10">
+                    <a href="{% url 'index' %}" class="text-gray-700 hover:text-primary transition-all duration-300 nav-link font-medium px-2">Home</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'my_adoption_requests' %}" class="text-gray-700 hover:text-primary transition-all duration-300 nav-link font-medium">My Requests</a>
+                        {% if user.is_staff %}
+                            <a href="{% url 'admin_dashboard' %}" class="text-gray-700 hover:text-primary transition-all duration-300 nav-link font-medium">Admin</a>
+                        {% endif %}
+                        <a href="{% url 'logout' %}" class="text-gray-700 hover:text-primary transition-all duration-300 nav-link font-medium">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="text-gray-700 hover:text-primary transition-all duration-300 nav-link font-medium">Login</a>
+                        <a href="{% url 'signup' %}" class="bg-gradient-to-r from-rose-500 to-amber-500 text-white hover:from-rose-600 hover:to-amber-600 font-medium py-2 px-6 rounded-xl shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">Sign Up</a>
+                    {% endif %}
+                </div>
+                <button class="md:hidden text-gray-700 focus:outline-none" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div class="md:hidden hidden mt-4 pb-2 animate-slide-up" id="mobile-menu">
+                <div class="flex flex-col gap-4 bg-white p-4 rounded-xl shadow-md">
+                    <a href="{% url 'index' %}" class="text-gray-700 hover:text-primary py-2 transition-all duration-300 hover:pl-2">Home</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'my_adoption_requests' %}" class="text-gray-700 hover:text-primary py-2 transition-all duration-300 hover:pl-2">My Requests</a>
+                        {% if user.is_staff %}
+                            <a href="{% url 'admin_dashboard' %}" class="text-gray-700 hover:text-primary py-2 transition-all duration-300 hover:pl-2">Admin</a>
+                        {% endif %}
+                        <a href="{% url 'logout' %}" class="text-gray-700 hover:text-primary py-2 transition-all duration-300 hover:pl-2">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="text-gray-700 hover:text-primary py-2 transition-all duration-300 hover:pl-2">Login</a>
+                        <a href="{% url 'signup' %}" class="bg-gradient-to-r from-rose-500 to-amber-500 text-white hover:from-rose-600 hover:to-amber-600 font-medium py-2 px-4 rounded-xl shadow-md transition-all duration-300 text-center">Sign Up</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mx-auto px-4 py-8">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="bg-{% if message.tags == 'success' %}green{% else %}red{% endif %}-100 border border-{% if message.tags == 'success' %}green{% else %}red{% endif %}-400 text-{% if message.tags == 'success' %}green{% else %}red{% endif %}-700 px-4 py-3 rounded-xl relative mb-6 animate-fade-in shadow-md">
+                    <div class="flex items-center">
+                        <div class="mr-3">
+                            {% if message.tags == 'success' %}
+                                <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                            {% else %}
+                                <i class="fas fa-exclamation-circle text-red-500 text-xl"></i>
+                            {% endif %}
+                        </div>
+                        <div>{{ message }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 px-4 mt-20 relative">
+        <div class="custom-shape-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="mb-8 md:mb-0 animate-fade-in">
+                    <div class="flex items-center gap-3 mb-6 group">
+                        <div class="w-12 h-12 bg-rose-500 bg-opacity-20 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:rotate-12">
+                            <span class="text-2xl">🐾</span>
+                        </div>
+                        <span class="font-bold text-xl bg-gradient-to-r from-rose-400 to-amber-400 bg-clip-text text-transparent">Paws & Hearts</span>
+                    </div>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        Finding loving homes for our furry friends since 2010. We believe every animal deserves a second chance at happiness and a forever family.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-gradient-to-r from-rose-500 to-amber-500 rounded-xl flex items-center justify-center text-white hover:from-rose-600 hover:to-amber-600 transition-all duration-300 footer-icon shadow-lg">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gradient-to-r from-rose-500 to-amber-500 rounded-xl flex items-center justify-center text-white hover:from-rose-600 hover:to-amber-600 transition-all duration-300 footer-icon shadow-lg">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gradient-to-r from-rose-500 to-amber-500 rounded-xl flex items-center justify-center text-white hover:from-rose-600 hover:to-amber-600 transition-all duration-300 footer-icon shadow-lg">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="animate-fade-in" style="animation-delay: 0.2s;">
+                    <h5 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2 relative">
+                        Quick Links
+                        <span class="absolute bottom-0 left-0 w-20 h-1 bg-gradient-to-r from-rose-500 to-amber-500"></span>
+                    </h5>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="{% url 'index' %}" class="text-gray-400 hover:text-white transition duration-300 flex items-center gap-2 group">
+                                <i class="fas fa-chevron-right text-xs text-rose-400 group-hover:translate-x-1 transition-transform duration-300"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition duration-300 flex items-center gap-2 group">
+                                <i class="fas fa-chevron-right text-xs text-rose-400 group-hover:translate-x-1 transition-transform duration-300"></i>
+                                <span>About Us</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition duration-300 flex items-center gap-2 group">
+                                <i class="fas fa-chevron-right text-xs text-rose-400 group-hover:translate-x-1 transition-transform duration-300"></i>
+                                <span>Available Pets</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition duration-300 flex items-center gap-2 group">
+                                <i class="fas fa-chevron-right text-xs text-rose-400 group-hover:translate-x-1 transition-transform duration-300"></i>
+                                <span>Adoption Process</span>
+                            </a>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'logout' %}" class="text-gray-400 hover:text-white transition duration-300 flex items-center gap-2 group">
+                                    <i class="fas fa-chevron-right text-xs text-rose-400 group-hover:translate-x-1 transition-transform duration-300"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{% url 'login' %}" class="text-gray-400 hover:text-white transition duration-300 flex items-center gap-2 group">
+                                    <i class="fas fa-chevron-right text-xs text-rose-400 group-hover:translate-x-1 transition-transform duration-300"></i>
+                                    <span>Login</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'signup' %}" class="text-gray-400 hover:text-white transition duration-300 flex items-center gap-2 group">
+                                    <i class="fas fa-chevron-right text-xs text-rose-400 group-hover:translate-x-1 transition-transform duration-300"></i>
+                                    <span>Sign Up</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                
+                <div class="animate-fade-in" style="animation-delay: 0.4s;">
+                    <h5 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2 relative">
+                        Contact Us
+                        <span class="absolute bottom-0 left-0 w-20 h-1 bg-gradient-to-r from-rose-500 to-amber-500"></span>
+                    </h5>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-rose-500 bg-opacity-20 rounded-xl flex items-center justify-center mt-1 flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-rose-400"></i>
+                            </div>
+                            <span class="text-gray-400">123 Pet Street, Animalville, CA 90210</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-rose-500 bg-opacity-20 rounded-xl flex items-center justify-center mt-1 flex-shrink-0">
+                                <i class="fas fa-phone text-rose-400"></i>
+                            </div>
+                            <span class="text-gray-400">(123) 456-7890</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-rose-500 bg-opacity-20 rounded-xl flex items-center justify-center mt-1 flex-shrink-0">
+                                <i class="fas fa-envelope text-rose-400"></i>
+                            </div>
+                            <span class="text-gray-400">info@pawsandhearts.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 Paws & Hearts Adoption. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Animation delay for elements with animation-delay style
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('[style*="animation-delay"]');
+            animatedElements.forEach(element => {
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                }, parseFloat(element.style.animationDelay) * 1000);
+            });
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Animate elements when they come into view
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.feature-icon, .process-step, .stat-circle, .pet-card').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

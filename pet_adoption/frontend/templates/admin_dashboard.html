@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-3xl md:text-4xl font-bold mb-8 text-gray-800 animate-fade-in bg-gradient-to-r from-rose-500 to-amber-500 bg-clip-text text-transparent">Admin Dashboard</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 animate-fade-in group" style="animation-delay: 0.1s;">
+        <div class="bg-gradient-to-r from-rose-500 to-rose-400 p-8 text-white relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-white bg-opacity-10 rounded-full"></div>
+            <div class="absolute -right-5 -bottom-10 w-20 h-20 bg-white bg-opacity-10 rounded-full"></div>
+            <div class="flex items-center justify-between relative z-10">
+                <h2 class="text-2xl font-bold">Manage Pets</h2>
+                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center text-3xl shadow-lg transform group-hover:rotate-12 transition-all duration-500">🐶</div>
+            </div>
+        </div>
+        <div class="p-8">
+            <p class="text-gray-600 mb-8 leading-relaxed">Add new pets, update information, or mark pets as adopted in the system. Manage all your furry friends in one place.</p>
+            <a href="{% url 'admin_pets' %}" class="inline-flex items-center bg-gradient-to-r from-rose-500 to-rose-600 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group">
+                <i class="fas fa-paw mr-2 group-hover:animate-bounce"></i>
+                <span>Manage Pets</span>
+                <i class="fas fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300"></i>
+            </a>
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 animate-fade-in group" style="animation-delay: 0.2s;">
+        <div class="bg-gradient-to-r from-amber-500 to-amber-400 p-8 text-white relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-white bg-opacity-10 rounded-full"></div>
+            <div class="absolute -right-5 -bottom-10 w-20 h-20 bg-white bg-opacity-10 rounded-full"></div>
+            <div class="flex items-center justify-between relative z-10">
+                <h2 class="text-2xl font-bold">Adoption Requests</h2>
+                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center text-3xl shadow-lg transform group-hover:rotate-12 transition-all duration-500">📋</div>
+            </div>
+        </div>
+        <div class="p-8">
+            <p class="text-gray-600 mb-8 leading-relaxed">Review and manage adoption requests submitted by users. Approve or reject applications and keep track of all requests.</p>
+            <a href="{% url 'admin_requests' %}" class="inline-flex items-center bg-gradient-to-r from-amber-500 to-amber-600 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group">
+                <i class="fas fa-clipboard-list mr-2 group-hover:animate-bounce"></i>
+                <span>View Requests</span>
+                <i class="fas fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="mt-10 bg-white rounded-2xl shadow-xl p-8 animate-fade-in" style="animation-delay: 0.3s;">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 flex items-center">
+        <div class="w-10 h-10 bg-rose-100 rounded-xl flex items-center justify-center mr-3 text-rose-500">
+            <i class="fas fa-chart-bar"></i>
+        </div>
+        Quick Stats
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="bg-gradient-to-br from-rose-50 to-white p-6 rounded-2xl border border-rose-100 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-600 text-sm font-medium">Total Pets</p>
+                    <p class="text-3xl font-bold text-rose-500 mt-2">{{ total_pets }}</p>
+                </div>
+                <div class="w-14 h-14 bg-rose-100 rounded-2xl flex items-center justify-center text-rose-500 shadow-md">
+                    <i class="fas fa-paw text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 h-2 bg-rose-100 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-rose-400 to-rose-500 rounded-full" style="width: 75%"></div>
+            </div>
+        </div>
+        
+        <div class="bg-gradient-to-br from-amber-50 to-white p-6 rounded-2xl border border-amber-100 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-600 text-sm font-medium">Available</p>
+                    <p class="text-3xl font-bold text-amber-500 mt-2">{{ available_pets }}</p>
+                </div>
+                <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-500 shadow-md">
+                    <i class="fas fa-home text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 h-2 bg-amber-100 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full" style="width: 60%"></div>
+            </div>
+        </div>
+        
+        <div class="bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border border-green-100 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-600 text-sm font-medium">Adopted</p>
+                    <p class="text-3xl font-bold text-green-500 mt-2">{{ adopted_pets }}</p>
+                </div>
+                <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center text-green-500 shadow-md">
+                    <i class="fas fa-check-circle text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 h-2 bg-green-100 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-green-400 to-green-500 rounded-full" style="width: 45%"></div>
+            </div>
+        </div>
+        
+        <div class="bg-gradient-to-br from-blue-50 to-white p-6 rounded-2xl border border-blue-100 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-600 text-sm font-medium">Pending Requests</p>
+                    <p class="text-3xl font-bold text-blue-500 mt-2">{{ pending_requests }}</p>
+                </div>
+                <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-500 shadow-md">
+                    <i class="fas fa-clock text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 h-2 bg-blue-100 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-400 to-blue-500 rounded-full" style="width: 30%"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="flex items-center gap-3 mb-8 animate-fade-in">
+    <a href="{% url 'index' %}" class="text-rose-500 hover:text-rose-600 transition-all duration-300 flex items-center gap-2 group">
+        <div class="w-8 h-8 bg-rose-100 rounded-xl flex items-center justify-center group-hover:bg-rose-200 transition-all duration-300">
+            <i class="fas fa-arrow-left text-rose-500"></i>
+        </div>
+        <span>Back to Pets</span>
+    </a>
+</div>
+
+{% if pet %}
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden animate-fade-in">
+        <div class="md:flex">
+            {% if pet.image_url %}
+                <div class="md:w-1/2 relative overflow-hidden">
+                    <img src="{{ pet.image_url }}" alt="{{ pet.name }}" class="w-full h-64 md:h-full object-cover hover:scale-105 transition-all duration-500">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6 md:hidden">
+                        <h1 class="text-3xl font-bold text-white">{{ pet.name }}</h1>
+                        <span class="text-white px-3 py-1 rounded-xl text-sm inline-flex items-center gap-1 {% if pet.adopted %}bg-gray-500{% else %}bg-amber-400{% endif %} mt-2">
+                            {% if pet.adopted %}
+                                <i class="fas fa-check-circle"></i> Adopted
+                            {% else %}
+                                <i class="fas fa-heart"></i> Available
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="md:w-1/2 p-8 md:p-10">
+                <div class="flex justify-between items-center mb-6 hidden md:flex">
+                    <h1 class="text-3xl font-bold text-gray-800 bg-gradient-to-r from-rose-500 to-amber-500 bg-clip-text text-transparent">{{ pet.name }}</h1>
+                    <span class="text-white px-3 py-1.5 rounded-xl text-sm font-medium inline-flex items-center gap-1 {% if pet.adopted %}bg-gray-500{% else %}bg-gradient-to-r from-amber-400 to-amber-500{% endif %} shadow-sm">
+                        {% if pet.adopted %}
+                            <i class="fas fa-check-circle"></i> Adopted
+                        {% else %}
+                            <i class="fas fa-heart"></i> Available
+                        {% endif %}
+                    </span>
+                </div>
+                
+                <div class="space-y-4 mb-8">
+                    <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-300">
+                        <div class="w-10 h-10 bg-rose-100 rounded-xl flex items-center justify-center text-rose-500">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Type</p>
+                            <p class="font-medium text-gray-800">{{ pet.type }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-300">
+                        <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center text-amber-500">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Breed</p>
+                            <p class="font-medium text-gray-800">{{ pet.breed|default:"N/A" }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-300">
+                        <div class="w-10 h-10 bg-rose-100 rounded-xl flex items-center justify-center text-rose-500">
+                            <i class="fas fa-venus-mars"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Gender</p>
+                            <p class="font-medium text-gray-800">{{ pet.gender|default:"N/A" }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-300">
+                        <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center text-amber-500">
+                            <i class="fas fa-birthday-cake"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Age</p>
+                            <p class="font-medium text-gray-800">{{ pet.age|default:"N/A" }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <h3 class="font-medium text-gray-700 mb-3 flex items-center gap-2">
+                        <div class="w-6 h-6 bg-rose-100 rounded-lg flex items-center justify-center text-rose-500">
+                            <i class="fas fa-info-circle text-sm"></i>
+                        </div>
+                        About {{ pet.name }}
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed bg-gray-50 p-4 rounded-xl">
+                        {{ pet.description|default:"No description available." }}
+                    </p>
+                </div>
+                
+                {% if not pet.adopted and user.is_authenticated %}
+                    <a href="{% url 'adoption_request' pet.id %}" class="inline-block w-full bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-medium py-3 px-6 rounded-xl text-center transition-all duration-300 shadow-lg shadow-rose-500/20">
+                        <i class="fas fa-heart mr-2"></i>Request Adoption
+                    </a>
+                {% elif not user.is_authenticated %}
+                    <div class="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-xl">
+                        <p class="flex items-center gap-2">
+                            <i class="fas fa-info-circle"></i>
+                            Please <a href="{% url 'login' %}" class="text-rose-500 hover:text-rose-600 font-medium">log in</a> or <a href="{% url 'signup' %}" class="text-rose-500 hover:text-rose-600 font-medium">sign up</a> to request adoption.
+                        </p>
+                    </div>
+                {% elif pet.adopted %}
+                    <div class="bg-gray-100 border border-gray-200 text-gray-700 p-4 rounded-xl">
+                        <p class="flex items-center gap-2">
+                            <i class="fas fa-heart-broken"></i>
+                            This pet has already been adopted.
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="text-center py-12 bg-white rounded-2xl shadow-xl animate-fade-in">
+        <span class="text-5xl block mb-4">😿</span>
+        <h1 class="text-2xl font-bold mb-2 text-gray-800">Pet Not Found</h1>
+        <p class="text-gray-600 mb-6">The pet you're looking for doesn't exist or has been removed.</p>
+        <a href="{% url 'index' %}" class="bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-medium py-3 px-6 rounded-xl inline-block transition-all duration-300 shadow-lg shadow-rose-500/20">
+            <i class="fas fa-paw mr-2"></i>Back to Available Pets
+        </a>
+    </div>
+{% endif %}
+{% endblock %}

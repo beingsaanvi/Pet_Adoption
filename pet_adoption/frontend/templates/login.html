@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto animate-fade-in">
+    <h1 class="text-3xl md:text-4xl font-bold mb-8 text-center bg-gradient-to-r from-rose-500 to-amber-500 bg-clip-text text-transparent">Welcome Back!</h1>
+    
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div class="bg-gradient-to-r from-rose-500 to-amber-500 p-8 text-white text-center relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-white bg-opacity-10 rounded-full"></div>
+            <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-white bg-opacity-10 rounded-full"></div>
+            <div class="relative z-10">
+                <div class="w-20 h-20 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center text-4xl mx-auto mb-4 shadow-lg animate-bounce-in">🐾</div>
+                <h2 class="text-2xl font-bold">Login to Your Account</h2>
+                <p class="mt-2 text-white/90">Access your account to manage adoptions</p>
+            </div>
+        </div>
+        
+        <div class="p-8">
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+                <div class="space-y-2">
+                    <label for="username" class="block text-gray-700 font-medium">Username</label>
+                    <div class="relative">
+                        <input type="text" name="username" id="username" class="border border-gray-300 rounded-xl w-full p-3 pl-10 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-400 transition-all duration-300 shadow-sm" required>
+                        <div class="absolute left-3 top-3 text-rose-500">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-2">
+                    <label for="password" class="block text-gray-700 font-medium">Password</label>
+                    <div class="relative">
+                        <input type="password" name="password" id="password" class="border border-gray-300 rounded-xl w-full p-3 pl-10 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-400 transition-all duration-300 shadow-sm" required>
+                        <div class="absolute left-3 top-3 text-rose-500">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-medium py-3 px-4 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg w-full flex items-center justify-center gap-2">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
+                </button>
+            </form>
+            
+            <div class="mt-8 text-center">
+                <p class="text-gray-600">Don't have an account? <a href="{% url 'signup' %}" class="text-rose-500 hover:text-rose-600 font-medium">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

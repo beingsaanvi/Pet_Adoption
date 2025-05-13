@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load custom_filters %}
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="animate-slide-right">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 font-poppins bg-gradient-to-r from-rose-500 to-amber-500 bg-clip-text text-transparent">Ready to Adopt!</h1>
+                <p class="text-gray-600 mb-8 text-lg leading-relaxed">Find your perfect furry companion and give them a loving forever home. Our adoption process is simple, rewarding, and life-changing for both you and your new pet.</p>
+                <a href="#available-pets" class="bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-medium py-3 px-8 rounded-xl transition-all duration-300 inline-flex items-center gap-2 hover:-translate-y-1 hover:shadow-lg group">
+                    <span>Adopt Now</span>
+                    <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform duration-300"></i>
+                </a>
+            </div>
+            <div class="hero-image animate-scale-in" style="animation-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Dog ready for adoption" class="max-w-full rounded-3xl shadow-2xl">
+            </div>
+        </div>
+    </div>
+    <div class="custom-shape-divider">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill" fill="#f8f9fa"></path>
+        </svg>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-20">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="text-center animate-fade-in" style="animation-delay: 0.1s;">
+                <div class="feature-icon bg-amber-100 text-amber-500 mx-auto">
+                    <i class="fas fa-heart text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Loving Care</h3>
+                <p class="text-gray-600">All our pets receive the best care and attention while waiting for their forever homes. We ensure they're healthy and happy.</p>
+            </div>
+            
+            <div class="text-center animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="feature-icon bg-rose-100 text-rose-500 mx-auto">
+                    <i class="fas fa-paw text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Healthy Pets</h3>
+                <p class="text-gray-600">Every pet is vaccinated, spayed/neutered, and given a thorough health check before adoption to ensure they're ready for their new home.</p>
+            </div>
+            
+            <div class="text-center animate-fade-in" style="animation-delay: 0.3s;">
+                <div class="feature-icon bg-amber-100 text-amber-500 mx-auto">
+                    <i class="fas fa-home text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Perfect Match</h3>
+                <p class="text-gray-600">We help you find the perfect pet that matches your lifestyle and preferences, ensuring a harmonious relationship for years to come.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Best for Your Pet Section -->
+<section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="animate-fade-in relative">
+                <div class="absolute -top-10 -left-10 w-40 h-40 bg-amber-100 rounded-full opacity-50 z-0"></div>
+                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-rose-100 rounded-full opacity-50 z-0"></div>
+                <img src="https://images.unsplash.com/photo-1560743641-3914f2c45636?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Happy pets" class="max-w-full rounded-3xl shadow-xl relative z-10">
+            </div>
+            <div class="animate-fade-in" style="animation-delay: 0.2s;">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 section-title bg-gradient-to-r from-rose-500 to-amber-500 bg-clip-text text-transparent">The Best for Your Pet!</h2>
+                <p class="text-gray-600 mb-8 leading-relaxed">We ensure all our pets receive the best care possible before and during the adoption process. Our team is dedicated to finding the perfect match for both pets and adopters, creating lasting bonds and happy homes.</p>
+                
+                <ul class="space-y-5">
+                    <li class="flex items-start gap-4 group">
+                        <div class="w-10 h-10 bg-gradient-to-r from-rose-500 to-amber-500 rounded-xl flex items-center justify-center mt-1 flex-shrink-0 text-white shadow-md group-hover:scale-110 transition-all duration-300">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-800 mb-1">Complete health check and vaccinations</h4>
+                            <p class="text-gray-600 text-sm">All pets are thoroughly examined by veterinarians and receive necessary vaccinations.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4 group">
+                        <div class="w-10 h-10 bg-gradient-to-r from-rose-500 to-amber-500 rounded-xl flex items-center justify-center mt-1 flex-shrink-0 text-white shadow-md group-hover:scale-110 transition-all duration-300">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-800 mb-1">Behavioral assessment and training</h4>
+                            <p class="text-gray-600 text-sm">We evaluate each pet's behavior and provide basic training to ensure they're ready for adoption.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4 group">
+                        <div class="w-10 h-10 bg-gradient-to-r from-rose-500 to-amber-500 rounded-xl flex items-center justify-center mt-1 flex-shrink-0 text-white shadow-md group-hover:scale-110 transition-all duration-300">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-800 mb-1">Post-adoption support and resources</h4>
+                            <p class="text-gray-600 text-sm">Our team remains available to provide guidance and assistance after adoption.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4 group">
+                        <div class="w-10 h-10 bg-gradient-to-r from-rose-500 to-amber-500 rounded-xl flex items-center justify-center mt-1 flex-shrink-0 text-white shadow-md group-hover:scale-110 transition-all duration-300">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-800 mb-1">Lifetime commitment to our adopted pets</h4>
+                            <p class="text-gray-600 text-sm">We stand by our pets for life, ensuring they always have a safe place to return if needed.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Want a Pet Section -->
+<section class="py-24 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');">
+    <div class="absolute inset-0 bg-gradient-to-r from-rose-900/80 to-amber-900/80"></div>
+    <div class="container mx-auto text-center relative z-10">
+        <div class="max-w-2xl mx-auto animate-fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Want a pet for your loved ones?</h2>
+            <p class="text-white/90 mb-8 text-lg leading-relaxed">Adopting a pet is a rewarding experience that brings joy and companionship to your family. Browse our available pets and find your perfect match today.</p>
+            <a href="#available-pets" class="bg-white hover:bg-gray-100 text-gray-800 font-medium py-3 px-8 rounded-xl transition-all duration-300 inline-flex items-center gap-2 hover:-translate-y-1 hover:shadow-lg group">
+                <i class="fas fa-search text-rose-500"></i>
+                <span>Find Your Pet</span>
+                <i class="fas fa-arrow-right text-rose-500 group-hover:translate-x-1 transition-transform duration-300"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Adoption Process Section -->
+<section class="py-20">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-16 inline-block section-title bg-gradient-to-r from-rose-500 to-amber-500 bg-clip-text text-transparent">Pet Adoption Process</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
+            <div class="animate-fade-in" style="animation-delay: 0.1s;">
+                <div class="process-step bg-gradient-to-br from-amber-400 to-amber-500 text-white mx-auto">
+                    <i class="fas fa-search text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 mt-6">Choose your pet</h3>
+                <p class="text-gray-600 leading-relaxed">Browse our available pets and find one that matches your lifestyle and preferences. Take your time to find the perfect companion.</p>
+            </div>
+            
+            <div class="animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="process-step bg-gradient-to-br from-rose-500 to-rose-600 text-white mx-auto">
+                    <i class="fas fa-heart text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 mt-6">Meet your pet</h3>
+                <p class="text-gray-600 leading-relaxed">Schedule a meet and greet to spend time with your potential new family member. Get to know their personality and behavior.</p>
+            </div>
+            
+            <div class="animate-fade-in" style="animation-delay: 0.3s;">
+                <div class="process-step bg-gradient-to-br from-amber-400 to-amber-500 text-white mx-auto">
+                    <i class="fas fa-home text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 mt-6">Take your pet home</h3>
+                <p class="text-gray-600 leading-relaxed">Complete the adoption process and welcome your new pet into your loving home. Begin your journey together with joy and love.</p>
+            </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="animate-fade-in" style="animation-delay: 0.1s;">
+                <div class="stat-circle bg-gradient-to-br from-rose-50 to-white mb-4">
+                    <i class="fas fa-paw text-rose-500 text-xl mb-1"></i>
+                    <span class="font-bold text-2xl text-gray-800">1,765</span>
+                </div>
+                <p class="text-gray-700 font-medium">Happy Pets</p>
+            </div>
+            
+            <div class="animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="stat-circle bg-gradient-to-br from-amber-50 to-white mb-4">
+                    <i class="fas fa-users text-amber-500 text-xl mb-1"></i>
+                    <span class="font-bold text-2xl text-gray-800">387</span>
+                </div>
+                <p class="text-gray-700 font-medium">Happy Families</p>
+            </div>
+            
+            <div class="animate-fade-in" style="animation-delay: 0.3s;">
+                <div class="stat-circle bg-gradient-to-br from-rose-50 to-white mb-4">
+                    <i class="fas fa-heart text-rose-500 text-xl mb-1"></i>
+                    <span class="font-bold text-2xl text-gray-800">567</span>
+                </div>
+                <p class="text-gray-700 font-medium">Donations</p>
+            </div>
+            
+            <div class="animate-fade-in" style="animation-delay: 0.4s;">
+                <div class="stat-circle bg-gradient-to-br from-amber-50 to-white mb-4">
+                    <i class="fas fa-hand-holding-heart text-amber-500 text-xl mb-1"></i>
+                    <span class="font-bold text-2xl text-gray-800">1,870</span>
+                </div>
+                <p class="text-gray-700 font-medium">Helping Hours</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Taking Care of Pets Section -->
+<section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <div class="container mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center inline-block section-title bg-gradient-to-r from-rose-500 to-amber-500 bg-clip-text text-transparent">Taking Care of Pets</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="relative animate-fade-in">
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-amber-400 to-amber-500 rounded-full opacity-20 animate-pulse"></div>
+                <img src="https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=80" alt="Pet care" class="max-w-full mx-auto relative z-10 rounded-3xl shadow-xl">
+            </div>
+            
+            <div class="animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
+                        <div class="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center text-rose-500 mb-4 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="font-semibold mb-3 text-lg">Proper Nutrition</h3>
+                        <p class="text-gray-600">Feed your pet a balanced diet appropriate for their age, breed, and health needs.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
+                        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-amber-500 mb-4 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3 class="font-semibold mb-3 text-lg">Regular Exercise</h3>
+                        <p class="text-gray-600">Keep your pet active with daily exercise to maintain their physical and mental health.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
+                        <div class="w-12 h-12 bg-rose-100 rounded-xl flex items-center justify-center text-rose-500 mb-4 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300">
+                            <i class="fas fa-stethoscope"></i>
+                        </div>
+                        <h3 class="font-semibold mb-3 text-lg">Veterinary Care</h3>
+                        <p class="text-gray-600">Schedule regular check-ups and vaccinations to keep your pet healthy and prevent illness.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
+                        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-amber-500 mb-4 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
+                            <i class="fas fa-bath"></i>
+                        </div>
+                        <h3 class="font-semibold mb-3 text-lg">Grooming</h3>
+                        <p class="text-gray-600">Regular grooming keeps your pet clean, healthy, comfortable, and looking their best.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Pets Section -->
+<section class="py-20" id="available-pets">
+    <div class="container mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center inline-block section-title bg-gradient-to-r from-rose-500 to-amber-500 bg-clip-text text-transparent">Featured Pets</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for pet in pets|slice:":3" %}
+                <div class="pet-card animate-fade-in" style="animation-delay: {{ forloop.counter0|multiply:0.1 }}s;">
+                    {% if pet.image_url %}
+                        <img src="{{ pet.image_url }}" alt="{{ pet.name }}" class="w-full h-64 object-cover">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="{{ pet.name }}" class="w-full h-64 object-cover">
+                    {% endif %}
+                    
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold text-gray-800">{{ pet.name }}</h3>
+                            <span class="text-white text-xs px-3 py-1.5 rounded-xl font-medium {% if pet.adopted %}bg-gray-500{% else %}bg-gradient-to-r from-amber-400 to-amber-500{% endif %} shadow-sm">
+                                {{ pet.adopted|yesno:"Adopted,Available" }}
+                            </span>
+                        </div>
+                        
+                        <p class="text-gray-600 flex items-center gap-2">
+                            <span class="w-6 h-6 bg-rose-100 rounded-lg flex items-center justify-center text-rose-500">
+                                <i class="fas fa-paw text-xs"></i>
+                            </span>
+                            <span>Type: {{ pet.type }}</span>
+                        </p>
+                        {% if pet.breed %}
+                            <p class="text-gray-600 flex items-center gap-2 mt-1">
+                                <span class="w-6 h-6 bg-amber-100 rounded-lg flex items-center justify-center text-amber-500">
+                                    <i class="fas fa-tag text-xs"></i>
+                                </span>
+                                <span>Breed: {{ pet.breed }}</span>
+                            </p>
+                        {% endif %}
+                        {% if pet.age %}
+                            <p class="text-gray-600 flex items-center gap-2 mt-1">
+                                <span class="w-6 h-6 bg-rose-100 rounded-lg flex items-center justify-center text-rose-500">
+                                    <i class="fas fa-birthday-cake text-xs"></i>
+                                </span>
+                                <span>Age: {{ pet.age }}</span>
+                            </p>
+                        {% endif %}
+                        
+                        <a href="{% url 'pet_detail' pet.id %}" class="inline-flex items-center mt-6 bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-medium py-2 px-6 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group">
+                            <span>View Details</span>
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                        </a>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-span-full text-center py-16 bg-white rounded-2xl shadow-lg animate-fade-in">
+                    <div class="w-24 h-24 bg-amber-100 rounded-2xl flex items-center justify-center text-5xl mx-auto mb-6 animate-bounce-in">🔍</div>
+                    <p class="text-gray-600 text-xl font-medium mb-2">No pets found at the moment.</p>
+                    <p class="text-gray-500 mb-6">Please check back later for available pets.</p>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="{% url 'index' %}" class="inline-flex items-center bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-medium py-3 px-8 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg gap-2 group">
+                <i class="fas fa-paw"></i>
+                <span>View All Pets</span>
+                <i class="fas fa-arrow-right ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
